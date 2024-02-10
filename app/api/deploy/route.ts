@@ -34,7 +34,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   if (buttonId === 1) {
     chainId = "137";
-    rpcUrl = "https://go.getblock.io/9e0328cd2ffe480385dac5e2c5bc988b";
+    rpcUrl =
+      "https://frosty-solemn-diamond.matic.quiknode.pro/ae32fe5b91c1e127c4e6a065fe17d469910095c0";
   }
   // if (message.button === 2) {
   //   chainId = "some other chain";
