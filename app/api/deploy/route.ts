@@ -137,7 +137,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
     console.log("bundlerInstance");
 
-    const userOpHash = bundlerInstance.sendUserOpToBundler(
+    const userOpHash = await bundlerInstance.sendUserOpToBundler(
       deployerInitCodeUserOp
     );
     console.log("userOpHash: ", userOpHash);
