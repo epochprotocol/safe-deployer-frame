@@ -96,12 +96,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         {
           label: `Manage Smart Account`,
           action: "link",
-          target: `https://safe.epochprotocol.xyz/home?safe=mum:${userSCWallet}`,
+          target: `https://safe.epochprotocol.xyz/home?safe=matic:${userSCWallet}`,
         },
         {
           label: `View on Etherscan`,
           action: "link",
-          target: `https://mumbai.polygonscan.com/address/${userSCWallet}`,
+          target: `https://polygonscan.com/address/${userSCWallet}`,
         },
       ],
       image: `${NEXT_PUBLIC_URL}/api/og?address=${userSCWallet}&fid=${message.interactor.fid}&txid=`,
