@@ -16,10 +16,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 // const privateKey = process.env.PRIVATE_KEY!;
 const mnemonic = process.env.MNEMONIC || "";
-const chainId: string = "80001";
-const bundlerUrl: string = process.env.BUNDLER_URL
-  ? `${process.env.BUNDLER_URL}/${chainId}`
-  : "http://localhost:14337/80001";
 const ENTRY_POINT = "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
@@ -31,11 +27,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   let chainId: string = "80001";
   let rpcUrl: string =
     "https://go.getblock.io/8759d1fa53ef4f2098fd2509c2c9d3b5";
+  let bundlerUrl: string = "http://localhost:14337/80001";
 
   if (buttonId === 1) {
     chainId = "137";
     rpcUrl =
       "https://frosty-solemn-diamond.matic.quiknode.pro/ae32fe5b91c1e127c4e6a065fe17d469910095c0";
+    bundlerUrl = `${process.env.BUNDLER_URL}/${chainId}`;
   }
   // if (message.button === 2) {
   //   chainId = "some other chain";
