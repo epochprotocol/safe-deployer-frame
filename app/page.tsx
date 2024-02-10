@@ -1,23 +1,26 @@
-import { getFrameMetadata } from '@coinbase/onchainkit';
-import type { Metadata } from 'next';
-import { NEXT_PUBLIC_URL } from './config';
+import { getFrameMetadata } from "@coinbase/onchainkit";
+import type { Metadata } from "next";
+import { NEXT_PUBLIC_URL } from "./config";
 
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: 'Deploy Smart Account'
-    }
+      label: "Deploy SAFE Wallet on Polygon",
+    },
+    // {
+    //   label: "Deploy SAFE Wallet on Base",
+    // },
   ],
   image: `${NEXT_PUBLIC_URL}/main.png`,
   post_url: `${NEXT_PUBLIC_URL}/api/account`,
 });
 
 export const metadata: Metadata = {
-  title: 'Smart Account Frame Template',
-  description: 'LFG',
+  title: "Epoch Dapp",
+  description: "Automate Anything in Web3",
   openGraph: {
-    title: 'Smart Account Frame Templatess',
-    description: 'LFG',
+    title: "Epoch Dapp",
+    description: "Automate Anything in Web3",
     images: [`${NEXT_PUBLIC_URL}/main.png`],
   },
   other: {

@@ -1,5 +1,5 @@
 {
-  "name": "smart-account-frame-template",
+  "name": "safe-deployer-frame-epoch",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@coinbase/onchainkit": "^0.4.3",
+    "@coinbase/onchainkit": "^0.5.4",
+    "@epoch-protocol/sdk": "^0.9.26",
+    "ethereumjs-util": "^7.1.5",
+    "ethers": "^5.7.0",
     "next": "14.1.0",
     "permissionless": "^0.0.35",
     "react": "^18",
@@ -17,12 +20,12 @@
     "viem": "^2.7.2"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
   }
 }
