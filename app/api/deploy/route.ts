@@ -1,10 +1,4 @@
-import { NEXT_PUBLIC_URL } from "@/app/config";
 import { getMaticGasFee } from "@/utils";
-import {
-  FrameRequest,
-  getFrameHtmlResponse,
-  getFrameMessage,
-} from "@coinbase/onchainkit";
 import {
   HttpRpcClient,
   SafeAccountAPI,
@@ -76,76 +70,69 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     safeConfig: safeDefaultConfig[chainId],
     salt: safeDefaultConfig[chainId].salt,
   });
-
   console.log("walletAPIInstance");
 
-  const isNotDeployed = await walletAPIInstanceUser.checkAccountPhantom();
-  // const isNotDeployed = false;
-  console.log("isNotDeployed: ", isNotDeployed);
+  //   const isNotDeployed = await walletAPIInstanceUser.checkAccountPhantom();
+  // // const isNotDeployed = false;
+  //   console.log("isNotDeployed: ", isNotDeployed);
 
-  if (isNotDeployed) {
-    const unsignedUserOpUser = await walletAPIInstanceUser.createUnsignedUserOp(
-      {
-        target: accountAddress,
-        data: "0x00",
-        value: BigNumber.from(0),
-      }
-    );
+  const unsignedUserOpUser = await walletAPIInstanceUser.createUnsignedUserOp({
+    target: accountAddress,
+    data: "0x00",
+    value: BigNumber.from(0),
+  });
 
-    const userInitCode = await unsignedUserOpUser.initCode;
-    console.log("userInitCode: ", userInitCode);
+  const userInitCode = await unsignedUserOpUser.initCode;
+  console.log("userInitCode: ", userInitCode);
 
-    const safeProxyFactory = userInitCode.toString().slice(0, 42);
-    console.log("safeProxyFactory: ", safeProxyFactory);
+  const safeProxyFactory = userInitCode.toString().slice(0, 42);
+  console.log("safeProxyFactory: ", safeProxyFactory);
 
-    const callData =
-      "0x" + userInitCode.toString().slice(42, userInitCode.length);
+  const callData =
+    "0x" + userInitCode.toString().slice(42, userInitCode.length);
 
-    console.log("callData: ", callData);
+  console.log("callData: ", callData);
 
-    let opData: TransactionDetailsForUserOp = {
-      target: safeProxyFactory.toString(),
-      data: callData,
-      value: BigNumber.from(0),
-      // maxFeePerGas: BigNumber.from("50000000000"),
-      // maxPriorityFeePerGas: BigNumber.from("8600000000"),
-      // gasLimit: BigNumber.from("2000320"),
+  let opData: TransactionDetailsForUserOp = {
+    target: safeProxyFactory.toString(),
+    data: callData,
+    value: BigNumber.from(0),
+    // maxFeePerGas: BigNumber.from("50000000000"),
+    // maxPriorityFeePerGas: BigNumber.from("8600000000"),
+    // gasLimit: BigNumber.from("2000320"),
+  };
+
+  if (chainId === "137") {
+    const { maxPriorityFeePerGas, maxFeePerGas } = await getMaticGasFee();
+    opData = {
+      ...opData,
+      maxPriorityFeePerGas: (maxPriorityFeePerGas as BigNumber).mul(2),
+      maxFeePerGas: (maxFeePerGas as BigNumber).mul(2),
     };
-
-    if (chainId === "137") {
-      const { maxPriorityFeePerGas, maxFeePerGas } = await getMaticGasFee();
-      opData = {
-        ...opData,
-        maxPriorityFeePerGas: (maxPriorityFeePerGas as BigNumber).mul(2),
-        maxFeePerGas: (maxFeePerGas as BigNumber).mul(2),
-      };
-    }
-
-    const deployerInitCodeUserOp =
-      await walletAPIInstanceDeployer.createSignedUserOp(opData);
-    console.log("deployerInitCodeUserOp: ", deployerInitCodeUserOp);
-
-    console.log("bundlerUrl: ", bundlerUrl);
-    const bundlerInstance = new HttpRpcClient(
-      bundlerUrl,
-      ENTRY_POINT,
-      parseInt(chainId)
-    );
-    console.log("bundlerInstance");
-
-    const userOpHash = await bundlerInstance.sendUserOpToBundler(
-      deployerInitCodeUserOp
-    );
-    console.log("userOpHash: ", userOpHash);
-    // const txid = await walletAPIInstanceDeployer.getUserOpReceipt(userOpHash);
-    // const txid =
-    //   "0xc6880f312659ff73536454908f0d523fe22f4a85d062ae1ecece73bed393d108";
-    // console.log("txid: ", txid);
-
-    return NextResponse.json({ success: true }, { status: 500 });
-  } else {
-    return NextResponse.json({ success: true }, { status: 500 });
   }
+
+  const deployerInitCodeUserOp =
+    await walletAPIInstanceDeployer.createSignedUserOp(opData);
+  console.log("deployerInitCodeUserOp: ", deployerInitCodeUserOp);
+
+  console.log("bundlerUrl: ", bundlerUrl);
+  const bundlerInstance = new HttpRpcClient(
+    bundlerUrl,
+    ENTRY_POINT,
+    parseInt(chainId)
+  );
+  console.log("bundlerInstance");
+
+  const userOpHash = await bundlerInstance.sendUserOpToBundler(
+    deployerInitCodeUserOp
+  );
+  console.log("userOpHash: ", userOpHash);
+  // const txid = await walletAPIInstanceDeployer.getUserOpReceipt(userOpHash);
+  // const txid =
+  //   "0xc6880f312659ff73536454908f0d523fe22f4a85d062ae1ecece73bed393d108";
+  // console.log("txid: ", txid);
+
+  return NextResponse.json({ success: true }, { status: 201 });
 }
 
 export const dynamic = "force-dynamic";
