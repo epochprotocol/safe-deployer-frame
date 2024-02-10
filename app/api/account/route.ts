@@ -7,6 +7,16 @@ import {
 import { SafeAccountAPI, safeDefaultConfig } from "@epoch-protocol/sdk";
 import { VoidSigner, providers } from "ethers";
 import { NextRequest, NextResponse } from "next/server";
+import { init } from "@amplitude/analytics-node";
+import { track } from "@amplitude/analytics-node";
+
+// Option 1, initialize with API_KEY only
+init(process.env.AMPLITUDE_KEY || "");
+
+// Option 2, initialize including configuration
+init(process.env.AMPLITUDE_KEY || "", {
+  flushIntervalMillis: 30 * 1000, // Sets request interval to 30s
+});
 
 // const privateKey = process.env.PRIVATE_KEY!;
 const ENTRY_POINT = "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789";
@@ -42,6 +52,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const accountAddress = message.input || message.interactor.custody_address;
   // const accountAddress = "0xC40A20e82418347FEC023b2a8B94D102B0C67d53";
   console.log("accountAddress: ", accountAddress);
+
+  // Track a basic event
+  track(
+    "DEPLOY_FRAME",
+    { accountAddress },
+    {
+      user_id: accountAddress,
+    }
+  );
 
   // const walletMnemonic = Wallet.fromMnemonic(mnemonic);
   const provider = new providers.JsonRpcProvider({
