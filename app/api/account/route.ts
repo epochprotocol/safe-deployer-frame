@@ -39,7 +39,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   //   chainId = "some other chain";
   // }
 
-  const accountAddress = message.interactor.custody_address;
+  const accountAddress = message.input || message.interactor.custody_address;
   // const accountAddress = "0xC40A20e82418347FEC023b2a8B94D102B0C67d53";
   console.log("accountAddress: ", accountAddress);
 
