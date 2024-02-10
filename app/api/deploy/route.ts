@@ -79,10 +79,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   console.log("walletAPIInstance");
 
-  const userSCWallet = await walletAPIInstanceUser.getAccountAddress();
-  // const userSCWallet = "0x09191Ae48498527C9a80eA2B4211Dbe3439C26fc";
-  console.log("userSCWallet: ", userSCWallet);
-
   const isNotDeployed = await walletAPIInstanceUser.checkAccountPhantom();
   // const isNotDeployed = false;
   console.log("isNotDeployed: ", isNotDeployed);
@@ -90,7 +86,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (isNotDeployed) {
     const unsignedUserOpUser = await walletAPIInstanceUser.createUnsignedUserOp(
       {
-        target: userSCWallet,
+        target: accountAddress,
         data: "0x00",
         value: BigNumber.from(0),
       }
@@ -137,10 +133,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
     console.log("bundlerInstance");
 
-    const userOpHash = bundlerInstance
-      .sendUserOpToBundler(deployerInitCodeUserOp)
-      .then()
-      .catch();
+    const userOpHash = await bundlerInstance.sendUserOpToBundler(
+      deployerInitCodeUserOp
+    );
     console.log("userOpHash: ", userOpHash);
     // const txid = await walletAPIInstanceDeployer.getUserOpReceipt(userOpHash);
     // const txid =
