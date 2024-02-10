@@ -137,9 +137,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
     console.log("bundlerInstance");
 
-    const userOpHash = await bundlerInstance.sendUserOpToBundler(
-      deployerInitCodeUserOp
-    );
+    const userOpHash = bundlerInstance
+      .sendUserOpToBundler(deployerInitCodeUserOp)
+      .then()
+      .catch();
     console.log("userOpHash: ", userOpHash);
     // const txid = await walletAPIInstanceDeployer.getUserOpReceipt(userOpHash);
     // const txid =
