@@ -129,6 +129,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       await walletAPIInstanceDeployer.createSignedUserOp(opData);
     console.log("deployerInitCodeUserOp: ", deployerInitCodeUserOp);
 
+    console.log("bundlerUrl: ", bundlerUrl);
     const bundlerInstance = new HttpRpcClient(
       bundlerUrl,
       ENTRY_POINT,
