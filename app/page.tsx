@@ -31,7 +31,13 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>Smart Account Frame Template</h1>
+      <h1>Epoch SAFE Deployer</h1>
+      <div style={{ color: "blue" }}>
+        <a href="https://epochprotocol.xyz">Epoch Protocol</a>
+      </div>
+      <div style={{ color: "blue" }}>
+        <a href="https://app.epochprotocol.xyz">Checkout Epoch Dapp</a>
+      </div>
     </>
   );
 }
