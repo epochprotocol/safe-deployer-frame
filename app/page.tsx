@@ -5,7 +5,7 @@ import { NEXT_PUBLIC_URL } from "./config";
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: "Deploy SAFE Wallet on Polygon",
+      label: "FREE Deploy SAFE on Polygon",
     },
     // {
     //   label: "Deploy SAFE Wallet on Base",
