@@ -137,14 +137,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
     console.log("bundlerInstance");
 
-    const userOpHash = await bundlerInstance.sendUserOpToBundler(
+    const userOpHash = bundlerInstance.sendUserOpToBundler(
       deployerInitCodeUserOp
     );
     console.log("userOpHash: ", userOpHash);
-    const txid = await walletAPIInstanceDeployer.getUserOpReceipt(userOpHash);
+    // const txid = await walletAPIInstanceDeployer.getUserOpReceipt(userOpHash);
     // const txid =
     //   "0xc6880f312659ff73536454908f0d523fe22f4a85d062ae1ecece73bed393d108";
-    console.log("txid: ", txid);
+    // console.log("txid: ", txid);
 
     return NextResponse.json({ success: true }, { status: 500 });
   } else {

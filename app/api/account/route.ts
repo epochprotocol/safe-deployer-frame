@@ -82,6 +82,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // const userSCWallet = "0x09191Ae48498527C9a80eA2B4211Dbe3439C26fc";
   console.log("userSCWallet: ", userSCWallet);
 
+  // fetch without await because of 5sec limitation - intentional
   fetch(`${NEXT_PUBLIC_URL}/api/deploy`, {
     method: "POST",
     body: JSON.stringify({
