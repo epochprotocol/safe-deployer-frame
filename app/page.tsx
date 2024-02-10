@@ -12,9 +12,9 @@ const frameMetadata = getFrameMetadata({
     // },
   ],
   image: `${NEXT_PUBLIC_URL}/main.png`,
-  input: {
-    text: "Address - Optional Default - Custody Address",
-  },
+  // input: {
+  //   text: "Address - Optional Default - Custody Address",
+  // },
   post_url: `${NEXT_PUBLIC_URL}/api/account`,
 });
 
