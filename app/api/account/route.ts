@@ -36,6 +36,23 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return new NextResponse("Invalid Frame message", { status: 400 });
   }
 
+  if (!message.recasted) {
+    return new NextResponse(
+      getFrameHtmlResponse({
+        buttons: [
+          {
+            label: `Recast & Try Again`,
+          },
+        ],
+        image: `${NEXT_PUBLIC_URL}/main.png`,
+        // input: {
+        //   text: "Address - Optional Default - Custody Address",
+        // },
+        post_url: `${NEXT_PUBLIC_URL}/api/account`,
+      })
+    );
+  }
+
   let chainId: string = "80001";
   let rpcUrl: string =
     "https://go.getblock.io/8759d1fa53ef4f2098fd2509c2c9d3b5";
