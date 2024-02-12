@@ -44,10 +44,10 @@
   resolved "https://registry.npmjs.org/@coinbase/onchainkit/-/onchainkit-0.5.4.tgz#3cddd01ec69b564e2ffdf4158ff39bb3ae4f38ac"
   integrity sha512-fF8cwAmamM/az1TBbaZVPcAdrCdZ3db2FPIdRoWPrcLIU2Xmdw7EM2uaiwzzbfoGDkkgEt4nUefAH5P4mFrORw==
 
-"@epoch-protocol/sdk@^0.9.26":
-  version "0.9.26"
-  resolved "https://registry.npmjs.org/@epoch-protocol/sdk/-/sdk-0.9.26.tgz#6cc9a850eba922a3152424dc6ac421b94998cbca"
-  integrity sha512-K8LLkKUsTOMP946bJerRyKU0Jv2ywO10PTzRCEQwqaHSvTcRtLMiluCt4PRO4z5/hbGpSPyjlfNgS+xKpX/TEQ==
+"@epoch-protocol/sdk@^0.9.28":
+  version "0.9.28"
+  resolved "https://registry.npmjs.org/@epoch-protocol/sdk/-/sdk-0.9.28.tgz#7e65f646c19505d7f176bbaad36589c339623f7e"
+  integrity sha512-yVAGYMF5q3YW67/Pao93RDYu831ZLhOn/XUw1JP3nkOFo6uBLcEEh7RnL82SbdOCRbIR4BCoorWNQocCh1dHnA==
   dependencies:
     "@account-abstraction/contracts" "^0.6.0"
     "@epoch-protocol/utils" "^0.6.2"
