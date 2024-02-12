@@ -5,7 +5,7 @@ import { NEXT_PUBLIC_URL } from "./config";
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: "Recast & FREE Deploy SAFE",
+      label: "Recast & GET NOW",
     },
     // {
     //   label: "Deploy SAFE Wallet on Base",
